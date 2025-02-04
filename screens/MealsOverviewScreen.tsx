@@ -15,8 +15,6 @@ const MealsOverviewScreen = ({ navigation, route }: MealsOverviewScreenProps) =>
 
 	const displayedMeals = MEALS.filter((meal) => meal.categoryIds?.includes(categoryId))
 
-	console.log(displayedMeals)
-
 	function renderMealItem({ item }: { item: Meal }) {
 		return <MealItem meal={item} />
 	}
