@@ -4,11 +4,19 @@ import { CATEGORIES } from '../data/dummy-data'
 import Category from '../models/category'
 import CategoryGridTile from '../components/CategoryGridTile'
 
-function renderCategoryItem(itemData: ListRenderItemInfo<Category>) {
-	return <CategoryGridTile title={itemData.item.title} color={itemData.item.color} />
-}
+import { NavigationProp } from '@react-navigation/native'
 
-const CategoriesScreen = () => {
+const CategoriesScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+	const renderCategoryItem = ({ item }: ListRenderItemInfo<Category>) => {
+		return (
+			<CategoryGridTile
+				title={item.title}
+				color={item.color}
+				onPress={() => navigation.navigate('MealsOverview', { categoryId: item.id })}
+			/>
+		)
+	}
+
 	return <FlatList data={CATEGORIES} renderItem={renderCategoryItem} keyExtractor={(item) => item.id} numColumns={2} />
 }
 
