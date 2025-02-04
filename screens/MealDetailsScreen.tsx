@@ -1,24 +1,30 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { NavigationProp, RouteProp } from '@react-navigation/native'
 import { Image } from 'expo-image'
 import { MEALS } from '../data/dummy-data'
 import MealDetails from '../components/MealDetails'
 import SubTitle from '../components/MealDetail/SubTitle'
 import List from '../components/MealDetail/List'
+import IconButton from '../components/IconButton'
 
 interface MealDetailsScreenProps {
 	navigation: NavigationProp<any>
 	route: RouteProp<any, any>
 }
 
-const MealDetailsScreen = ({ route }: MealDetailsScreenProps) => {
+const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
 	const mealId = route?.params?.mealId
 
-	console.log('MealID: ', mealId)
-
 	const selectedMeal = MEALS.find((meal) => meal.id === mealId)
-	console.log(selectedMeal)
+
+	const headerButtonPressedHandler = () => {}
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => <IconButton onPress={headerButtonPressedHandler} icon='star' color='#c29307' />,
+		})
+	})
 
 	if (!selectedMeal) {
 		return (
