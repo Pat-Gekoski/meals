@@ -40,7 +40,7 @@ const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
 			<Text style={styles.title}>{selectedMeal.title}</Text>
 			<MealDetails meal={selectedMeal} />
 
-			<View style={{ maxWidth: '90%', alignSelf: 'center' }}>
+			<View style={{ width: '100%', paddingHorizontal: '5%', alignSelf: 'center' }}>
 				<SubTitle subTitle='Ingredients' />
 				<List data={selectedMeal.ingredients} />
 				<SubTitle subTitle='Steps' />
