@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Image } from 'expo-image'
 import React from 'react'
-import Meal from '../models/meal'
+import Meal from '../../models/meal'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import MealDetails from './MealDetails'
+import MealDetails from '../MealDetails'
 
 interface MealItemProps {
 	meal: Meal

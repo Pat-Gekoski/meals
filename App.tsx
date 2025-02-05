@@ -9,6 +9,7 @@ import MealDetailsScreen from './screens/MealDetailsScreen'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import FavoritesScreen from './screens/FavoritesScreen'
 import { Ionicons } from '@expo/vector-icons'
+import { FavoritesProvider } from './store/context/favorites-context'
 
 const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -51,16 +52,15 @@ export default function App() {
 	return (
 		<>
 			<StatusBar style='dark' />
-			<NavigationContainer>
-				<Stack.Navigator
-					initialRouteName='Drawer'
-					screenOptions={{ headerStyle: { backgroundColor: '#eaebeb' }, headerTintColor: '#191818' }}
-				>
-					<Stack.Screen name='Drawer' component={DrawerNavigator} options={{ title: 'Categories', headerShown: false }} />
-					<Stack.Screen name='MealsOverview' component={MealsOverviewScreen} />
-					<Stack.Screen name='MealDetails' component={MealDetailsScreen} />
-				</Stack.Navigator>
-			</NavigationContainer>
+			<FavoritesProvider>
+				<NavigationContainer>
+					<Stack.Navigator>
+						<Stack.Screen name='DrawerNavigator' component={DrawerNavigator} options={{ headerShown: false }} />
+						<Stack.Screen name='MealsOverview' component={MealsOverviewScreen} />
+						<Stack.Screen name='MealDetails' component={MealDetailsScreen} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</FavoritesProvider>
 		</>
 	)
 }

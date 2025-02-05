@@ -7,6 +7,7 @@ import MealDetails from '../components/MealDetails'
 import SubTitle from '../components/MealDetail/SubTitle'
 import List from '../components/MealDetail/List'
 import IconButton from '../components/IconButton'
+import { useFavorites } from '../store/context/favorites-context'
 
 interface MealDetailsScreenProps {
 	navigation: NavigationProp<any>
@@ -18,13 +19,23 @@ const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
 
 	const selectedMeal = MEALS.find((meal) => meal.id === mealId)
 
-	const headerButtonPressedHandler = () => {}
+	const { addFavorite, removeFavorite, ids: favorites } = useFavorites()
+
+	const isFavorite = selectedMeal ? favorites.includes(mealId) : false
+
+	const toggleFavorite = () => {
+		if (isFavorite) {
+			removeFavorite(mealId)
+		} else {
+			addFavorite(mealId)
+		}
+	}
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <IconButton onPress={headerButtonPressedHandler} icon='star' color='#c29307' />,
+			headerRight: () => <IconButton onPress={toggleFavorite} icon={isFavorite ? 'star' : 'star-outline'} color='#c29307' />,
 		})
-	})
+	}, [navigation, isFavorite])
 
 	if (!selectedMeal) {
 		return (
