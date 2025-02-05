@@ -3,9 +3,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import { useFavorites } from '../store/context/favorites-context'
 import MealsList from '../components/MealsList/MealsList'
 import { MEALS } from '../data/dummy-data'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/redux/favorites'
 
 const FavoritesScreen = () => {
-	const { ids: favorites } = useFavorites()
+	// const { ids: favorites } = useFavorites()
+	const { ids: favorites } = useSelector((state: RootState) => state.favorites)
 
 	const favoriteMeals = MEALS.filter((meal) => favorites.includes(meal.id))
 
